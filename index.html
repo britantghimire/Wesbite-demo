@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rakshabandan</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff6f61, #ffcc70, #ffd700);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Floating image (DVD) */
+    .floating-img {
+        position: absolute;
+        width: 250px; /* Bigger DVD */
+        height: auto;
+        z-index: 0; /* Behind everything */
+        opacity: 0.8; /* Slightly transparent so text is visible */
+        pointer-events: none;
+    }
+
+    /* Center festival message */
+    .center-text {
+        position: relative;
+        z-index: 2;
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px 40px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px rgba(255,255,255,0.5);
+        animation: glow 2s infinite alternate;
+        margin-bottom: 20px;
+    }
+
+    /* Essay section */
+    .essay {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        border-radius: 15px;
+        color: white;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-align: justify;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        backdrop-filter: blur(6px);
+        overflow-y: auto;
+        max-height: 50vh;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 20px #ffd700; }
+        to { box-shadow: 0 0 40px #ff1493; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Floating DVD-like image -->
+<img src="/auque-7-dias-tarde.gif" 
+     class="floating-img" id="dvd">
+
+<!-- Center Message -->
+<div class="center-text">🎉 Happy Rakshabandan to you Keshu Didi 🎉</div>
+
+<!-- Essay -->
+<div class="essay">
+    Rakshabandhan, also known as Rakhi, is a cherished festival in India that celebrates the beautiful bond between brothers and sisters. 
+    The name itself comes from two words: “Raksha,” meaning protection, and “Bandhan,” meaning bond. On this special day, sisters tie a 
+    sacred thread called a “Rakhi” on their brothers’ wrists, symbolizing love, care, and a promise of protection. In return, brothers 
+    give gifts and pledge to protect their sisters throughout their lives.<br><br>
+
+    The festival has deep cultural and historical roots. Ancient legends tell stories of queens sending Rakhis to kings as a sign of friendship 
+    and alliance. Today, it is celebrated with great joy in families across India and even among friends, breaking the boundaries of 
+    blood relationships. Rakshabandhan strengthens the emotional connection between siblings, reminding them of their lifelong 
+    commitment to support and care for each other.<br><br>
+
+    Beyond its rituals, Rakshabandhan carries a universal message of harmony, trust, and compassion. It reminds us that love and protection 
+    are bonds that should be nurtured, not just within families but in society at large. In a world that often feels divided, festivals 
+    like Rakshabandhan bring people closer together, celebrating the ties that truly matter.
+</div>
+
+<script>
+    const dvd = document.getElementById('dvd');
+    let x = 100, y = 100;
+    let dx = 2, dy = 2;
+
+    function animate() {
+        const rect = dvd.getBoundingClientRect();
+        const winW = window.innerWidth;
+        const winH = window.innerHeight;
+
+        x += dx;
+        y += dy;
+
+        if (x <= 0 || x + rect.width >= winW) {
+            dx *= -1;
+            changeColor();
+        }
+        if (y <= 0 || y + rect.height >= winH) {
+            dy *= -1;
+            changeColor();
+        }
+
+        dvd.style.left = x + 'px';
+        dvd.style.top = y + 'px';
+
+        requestAnimationFrame(animate);
+    }
+
+    function changeColor() {
+        dvd.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+    }
+
+    dvd.style.position = 'absolute';
+    animate();
+</script>
+
+</body>
+</html>
